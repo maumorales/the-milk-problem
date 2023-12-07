@@ -59,11 +59,11 @@ services:
       - 8080:8080
 
   flyway:
-    command: -url=jdbc:postgresql://db/milk_test -user=milk -password=milk -schemas=milk_test -connectRetries=60 migrate
+    build:
+      context: .
+      dockerfile: Dockerfile.flyway
     container_name: flyway
     hostname: flyway
-    image: flyway/flyway
-    restart: unless-stopped
     environment: 
       FLYWAY_CLEAN_DISABLED: false
     depends_on: 

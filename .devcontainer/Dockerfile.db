@@ -1,3 +1,2 @@
 FROM postgres
-COPY products.sql /workspace/sql/
 COPY initdb.sh /docker-entrypoint-initdb.d/

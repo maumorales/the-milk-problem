@@ -1,0 +1,3 @@
+FROM flyway/flyway
+ENTRYPOINT FLYWAY_CLEAN_DISABLED=false flyway -user=milk -password=milk -schemas=milk_test -url="jdbc:postgresql://db:5432/milk_test" -locations=filesystem:/flyway/sql clean migrate \
+&& FLYWAY_CLEAN_DISABLED=false flyway -user=milk -password=milk -schemas=milk_development -url="jdbc:postgresql://db:5432/milk_development" -locations=filesystem:/flyway/sql clean migrate
