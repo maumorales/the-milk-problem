@@ -33,7 +33,8 @@
 				"vscjava.vscode-java-pack",
 				"vscjava.vscode-gradle",
 				"naco-siren.gradle-language",
-				"Gruntfuggly.todo-tree"
+				"Gruntfuggly.todo-tree",
+				"ms-azuretools.vscode-docker"
 			]
 		}
 	},

@@ -2,6 +2,7 @@ version: '3.8'
 services:
   app:
     # Using a Dockerfile is optional, but included for completeness.
+    container_name: app
     build: 
       context: .
       dockerfile: Dockerfile
@@ -39,27 +40,33 @@ services:
   # You can include other services not opened by VS Code as well
   # As in the "app" service, use "forwardPorts" in **devcontainer.json** to forward an app port locally.
   db:
-    image: postgres
+    build: 
+      context: .
+      dockerfile: Dockerfile.db
+    container_name: db
+    hostname: db
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: password
-    ports:
+    ports: 
       - 5432:5432
-    hostname: db
 
   adminer:
+    container_name: adminer
     image: adminer
     restart: unless-stopped
     ports:
       - 8080:8080
 
   flyway:
-    image: flyway/flyway
+    command: -url=jdbc:postgresql://db/milk_test -user=milk -password=milk -schemas=milk_test -connectRetries=60 migrate
     container_name: flyway
-    command: -url=jdbc:mysql://db -schemas=myschema -user=root -password=P@ssw0rd -connectRetries=60 migrate
-    restart: unless-stopped
-    volumes:
-      - .:/flyway/sql
     hostname: flyway
-    depends_on:
+    image: flyway/flyway
+    restart: unless-stopped
+    environment: 
+      FLYWAY_CLEAN_DISABLED: false
+    depends_on: 
       - db
+    volumes: 
+      - ../databases/milk:/flyway/sql
