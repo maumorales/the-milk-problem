@@ -3,7 +3,7 @@ package io.milk.testsupport
 import io.milk.database.createDatasource
 import javax.sql.DataSource
 
-const val testJdbcUrl = "jdbc:postgresql://localhost:5432/milk_test"
+const val testJdbcUrl = "jdbc:postgresql://db:5432/milk_test"
 const val testDbUsername = "milk"
 const val testDbPassword = "milk"
 

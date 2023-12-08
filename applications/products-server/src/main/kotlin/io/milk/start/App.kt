@@ -55,7 +55,8 @@ fun Application.module(jdbcUrl: String, username: String, password: String) {
                     purchase.id
             )
 
-            productService.update(purchase) // TODO - Replace with decrementBy. Why is using update problematic?
+            //productService.update(purchase) // TODO - Replace with decrementBy. Why is using update problematic?
+            productService.decrementBy(purchase)
 
             call.respond(HttpStatusCode.Created)
         }
